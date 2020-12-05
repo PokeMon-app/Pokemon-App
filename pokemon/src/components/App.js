@@ -2,6 +2,7 @@
 import React from 'react';
 import NavbarIndex from "./NavbarIndex";
 import Info from "./Info";
+import EventTest from "./EventTest";
 
 
 //2. create function to return JSX
@@ -37,6 +38,7 @@ const App = props => {
             <Info name={"Charmander"} description={"lizard pokemon"} type={"fire"}/>
             <Info name={"Squirtle"} description={"turtle pokemon"} type={"water"}/>
             <div>{renderNames}</div>
+            <EventTest/>
         </div>
     )
 }
