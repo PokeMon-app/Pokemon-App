@@ -7,6 +7,8 @@ import EventTest from "./EventTest";
 
 //2. create function to return JSX
 const App = props => {
+    //state = {nameOfState : defaultValue} - defaultValue
+
     const pokeMon = [
         {name:"Ivysaur", description:"green pokemon", type:"grass"},
         {name:"Charmeleon", description:"lizard pokemon", type:"fire"},
