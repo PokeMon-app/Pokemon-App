@@ -1,7 +1,11 @@
 //1. import
 import React from 'react';
+import {Router, Route} from 'react-router-dom';
+
 import NavbarIndex from "./NavbarIndex";
 import Welcome from "./Welcome";
+import history from "../history"
+
 // import Info from "./Info";
 import EventTest from "./EventTest";
 import "./Style/App.css"
@@ -33,10 +37,13 @@ const App = props => {
     })
     return (
         <div>
+            <Router history={history}>
             <NavbarIndex/>
-            <Welcome/>
+            <Route path={"/event-test"} component={EventTest}/>
+           <Route path={"/"} component={Welcome}/>
             <div>{renderNames}</div>
-            <EventTest/>
+
+            </Router>
         </div>
     )
 }

@@ -10,14 +10,16 @@ import './Style/App.css'
 import pokeball from './Images/pokeball1.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSearch} from '@fortawesome/free-solid-svg-icons'
-
+import { Link } from 'react-router-dom';
 const NavbarIndex = () => {
 
     return (
 
         //Navdropdown can technically be a state change...
         <Navbar className={"nav mb-5"}>
+            <Link to={"/"}>
             <NavbarBrand>PokeTeam Builder</NavbarBrand>
+            </Link>
             {/* WILL SHOW ON LARGER SCREEN SIZES*/}
             <div className={"d-none d-md-block ml-auto"}>
                 <div className={"d-flex"}>
