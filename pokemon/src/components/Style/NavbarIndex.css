@@ -1,41 +1,53 @@
+
 .nav {
     display: flex;
     flex-wrap: wrap;
     padding-left: 0;
     margin-bottom: 0;
-    background-color: #2F3136;
+    background: #2F3136;
     height: 70px;
 }
 .nav h4 {
     color: #FFFFFF !important;
 }
-.nav button {
+.nav .pokeballContain {
+    /*border-radius: 50%;*/
+    /*border: 2px solid lightskyblue;*/
+}
+
+.nav .pokeball:focus {
+    outline: none;
+}
+.nav .buttonInner {
     margin: 0;
     padding: 0;
-    border: 0;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-}
-.nav button:focus {
-    height: 48px;
-    width: 48px;
-    border: 1px solid darkorange;
-}
-.nav button .button-inner {
-    border: 2px solid lightskyblue;
-}
-.nav button .button-inner:focus {
-    border: 2px solid darkorange;
-}
-.nav .pokeball {
-    /*height: 50px;*/
-    /*width: 50px;*/
     height: 100%;
     width: 100%;
+    border-radius: 50%;
+    /*border: 5px solid lightskyblue;*/
+    outline:none
+}
+.nav .pokeball {
+    position: relative;
+    height: 44px;
+    width: 44px;
     border: 2px solid black;
     border-radius: 50%;
 }
-.nav button:focus {
-    outline: none;
+.nav .buttonInner:focus {
+    height: 48px;
+    width: 48px;
+    margin: 1px;
+    border: 2px solid darkorange;
+}
+.nav .buttonInner {
+    border: 3px solid lightskyblue;
+}
+.border {
+    border: white;
+    height: 100%;
+
+}
+.openPokeball {
+
 }
