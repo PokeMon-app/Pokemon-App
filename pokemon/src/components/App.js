@@ -4,7 +4,10 @@ import {Router, Route} from 'react-router-dom';
 
 import NavbarIndex from "./NavbarIndex";
 import Welcome from "./Welcome";
-import history from "../history"
+import history from "../history";
+import Register from "./Register";
+import SignIn from "./SignIn";
+import UserProfile from "./UserProfile";
 
 // import Info from "./Info";
 import EventTest from "./EventTest";
@@ -39,11 +42,15 @@ const App = props => {
         <div>
             <Router history={history}>
             <NavbarIndex/>
-            <Route path={"/event-test"} component={EventTest}/>
-           <Route path={"/"} component={Welcome}/>
-            <div>{renderNames}</div>
+           <Route path={"/"} exact component={Welcome}/>
+           <Route path={"/register"} exact component={Register}/>
+           <Route path={"/sign-in"} exact component={SignIn}/>
+           <Route path={"/profile"} exact component={UserProfile}/>
+           {/*<div>{renderNames}</div>*/}
+
 
             </Router>
+
         </div>
     )
 }

@@ -48,6 +48,6 @@
     height: 100%;
 
 }
-.openPokeball {
-
+.dropdown-toggle::after {
+    display: none !important;
 }
