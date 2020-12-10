@@ -38,17 +38,20 @@ const TypeModal = props => {
     const content = [{block: typeBlock1}, {block: typeBlock2}, {block: typeBlock3}, {block: typeBlock4}, {block: typeBlock5}, {block: typeBlock6}];
 
     const renderContent = content.map(section => {
+
         return (
             <div>
                 <div className={"d-flex justify-content-around"} key={section.block}>{section.block.map(icon => {
                     return (
-                        <div key={icon.type}>
-                        <button type={"button"} className={"btn btn-circle btn-"}>{icon.type}</button>
+                        <div className={"my-2"} key={icon.type}>
+                        <button type={"button"} className={(icon.type.toLowerCase()) + " btn-circle"}>{icon.type}</button>
                         </div>
                 )
                 })}</div>
             </div>
         )
+
+
     })
 
     return (
