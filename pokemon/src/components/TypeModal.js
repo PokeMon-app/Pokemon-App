@@ -1,14 +1,7 @@
 import React from 'react';
 import "./Style/TypeModal.css";
 
-const TypeModal = props => {
-
-    //water: #6390F0 / Grass: #7AC74C / Fire: #EE8130
-    //Flying : #A98FF3 / Fighting : #C22E28 / Poison : #A33EA1
-    //Electric : #F7D02C / Ground : #E2BF65 / Rock : #B6A136
-    //Ice : #96D9D6 / Bug : #A6B91A / Dragon : #6F35FC
-    //Ghost : #735797 / Dark : #705746 / Normal : #A8A77A
-    //Psychic : #F95587 / Fairy : #D685AD / Steel : #B7B7CE
+const TypeModal = () => {
 
     const typeBlock1 = [
         {type: 'Water'},
@@ -50,8 +43,6 @@ const TypeModal = props => {
                 })}</div>
             </div>
         )
-
-
     })
 
     return (

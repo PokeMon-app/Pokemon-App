@@ -1,4 +1,11 @@
-
+/*Navbar {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    padding-left: 0;*/
+/*    margin-bottom: 50px;*/
+/*    background: #2F3136;*/
+/*    height: 70px;*/
+/*}*/
 .nav {
     display: flex;
     flex-wrap: wrap;
@@ -24,7 +31,6 @@
     height: 100%;
     width: 100%;
     border-radius: 50%;
-    /*border: 5px solid lightskyblue;*/
     outline:none
 }
 .nav .pokeball {
@@ -34,20 +40,25 @@
     border: 2px solid black;
     border-radius: 50%;
 }
-.nav .buttonInner:focus {
-    height: 48px;
-    width: 48px;
-    margin: 1px;
-    border: 2px solid darkorange;
-}
-.nav .buttonInner {
+.closedPokeball {
     border: 3px solid lightskyblue;
 }
-.border {
-    border: white;
-    height: 100%;
 
+.openPokeball {
+    border: 3px solid darkorange;
 }
+
 .dropdown-toggle::after {
     display: none !important;
 }
+
+
+
+
+
+
+
+
+
+
+

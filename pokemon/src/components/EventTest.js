@@ -52,6 +52,7 @@ class EventTest extends React.Component {
                 {this.inputObject()}
                 {this.renderRectangle()}
                 {this.renderRedButton()}
+
             </Container>
         )
     }
