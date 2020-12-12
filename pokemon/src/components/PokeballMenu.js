@@ -1,24 +1,30 @@
 import React, {useState} from 'react';
-import './Style/PokeballMenu.css';
+// import './Style/PokeballMenu.css';
 import {Link} from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import TypeModal from "./TypeModal";
 
 
-function PokeballMenu() {
+function PokeballMenu(props) {
+
     const [show, setShow] = useState(false);
+    const [openPokeball, closePokeball] = useState(true);
+
+    // const handleClick = () => {
+    //     if(openPokeball === true)
+    //         closePokeball(false)
+    //     else
+    //         closePokeball(true)
+    // };
     //Will need to set a Hook that will close the pokeball when a user clicks on profile
     //Will need to close the pokeball when a user searches or clicks on a type icon
 
     return (
         <React.Fragment>
-            <ul
-                // onClick={handleClick}
-                // className={click ? 'pokeball-menu clicked' : 'pokeball-menu'}
-            >
+            <ul>
                 <li className={"dropdown-link"}>
                     <Link to={"/profile"} className={"nav-links"}
-                          // onClick={closePokeball}
+                          // onClick={handleClick()}
                     >Profile</Link>
                 </li>
                 <li className={"dropdown-link"}>

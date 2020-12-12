@@ -16,9 +16,10 @@ import "./Style/NavbarIndex.css"
 import ReactDOM from "react-dom";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
+import NavbarStatePlay from "./NavbarStatePlay";
 
 //2. create function to return JSX
-const App = props => {
+const App = () => {
     //state = {nameOfState : defaultValue} - defaultValue
 
     const pokeMon = [
@@ -43,7 +44,8 @@ const App = props => {
     return (
         <div>
             <Router history={history}>
-            <NavbarIndex/>
+            {/*<NavbarIndex/>*/}
+            <NavbarStatePlay />
            <Route path={"/"} exact component={Welcome}/>
            <Route path={"/register"} exact component={Register}/>
            <Route path={"/sign-in"} exact component={SignIn}/>
