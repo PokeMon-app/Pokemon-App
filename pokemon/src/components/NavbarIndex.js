@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 // import './Style/App.css'
 import pokeball from './Images/pokeball1.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
@@ -13,28 +13,56 @@ const NavbarIndex = () => {
     //useState() passed value is the default state
     //for example: const [count, setCount] = useState(4);
     //the default state is 4, current state is also 4 and we can update the state value with setCount
-    const [dropdown, setDropdown] = useState(false);
     const [show, setShow] = useState(false);
-    // const [open, setDropdown] = useState(false);
+
+
+    //TODO: 1. create reference to access the element that where the state changes will occur
+    const inputRef = useRef();
 
     //WORKS WITH HOOKS BUT NO FUNCTIONALITY FOR A USER
     // WHEN THEY CLICK A LIST ITEM OR CLICKING OUT OF MENU
     //----------------------------------------------------//
+    // const handleClick = () => {
+    //     if (dropdown === true)
+    //         setDropdown(false)
+    //     else
+    //         setDropdown(true)
+    //
+    // };
+    //TODO: 2. set the default value of the elements state
+    const [dropdown, setDropdown] = useState(false);
+
+    //TODO: 3. write a function that changes the state when the button is clicked
     const handleClick = () => {
-        if (dropdown === true)
-            setDropdown(false)
-        else
-            setDropdown(true)
+        setDropdown(!dropdown)
+    }
+    //TODO: 4. write a function that changes the state when a user clicks anywhere on the screen
+    const handleClickOutside = event => {
+        if (inputRef.current && !inputRef.current.contains(event.target)) {
+            setDropdown(!dropdown)
+            // this.setState({
+            //     open: false,
+            // });
+        }
+    //TODO: 5. create event listeners that will
+    const componentDidMount = () => {
+        document.addEventListener("mousedown", handleClickOutside);
+    }
+    const componentWillUnmount = () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+    }
 
     };
-
-    let container = React.createRef();
 
 
 
     const pokeballImg = () => {
         return (
-            <button className={"buttonInner" + (!dropdown ? " closedPokeball" : " openPokeball")} type={'button'}>
+            <button className={"buttonInner closedPokeball"
+                //TODO: refactor styling to change with state change
+            // + (!dropdown ? " closedPokeball" : " openPokeball")
+                }
+                    type={'button'} onClick={handleClick}>
                 <img className={"pokeball"} src={pokeball} alt="pokeball"/>
             </button>
         )
@@ -53,8 +81,8 @@ const NavbarIndex = () => {
                     <p>Sign In</p>
                 </Link>
                 <div className={"ml-auto mr-3 drop-icon"}
-                     onClick={handleClick}
-                     ref={this.container}
+                     // onClick={handleClick}
+                     ref={inputRef.current}
                 >
                     <div className={""}>
                         {pokeballImg()}

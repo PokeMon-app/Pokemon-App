@@ -44,8 +44,8 @@ const App = () => {
     return (
         <div>
             <Router history={history}>
-            {/*<NavbarIndex/>*/}
-            <NavbarStatePlay />
+            <NavbarIndex/>
+            {/*<NavbarStatePlay />*/}
            <Route path={"/"} exact component={Welcome}/>
            <Route path={"/register"} exact component={Register}/>
            <Route path={"/sign-in"} exact component={SignIn}/>

@@ -5,10 +5,13 @@ import TypeModal from "./TypeModal";
 import pokeball from "./Images/pokeball1.png";
 
 class NavbarStatePlay extends React.Component {
+    //accesses the element that container is set to
     container = React.createRef();
+    //state change to set default value of the dropdown to false;
     state = {
         open: false,
     };
+    //function that changes the state change when the button is clicked
     handleButtonCLick = () => {
         this.setState(state => {
             return {
@@ -16,12 +19,15 @@ class NavbarStatePlay extends React.Component {
             };
         });
     }
+
+    //events listeners that will run handleClickOutside
     componentDidMount() {
         document.addEventListener("mousedown", this.handleClickOutside);
     }
     componentWillUnmount() {
         document.removeEventListener("mousedown", this.handleClickOutside);
     }
+    //will change the state when anywhere on the screen is clicked
     handleClickOutside = event => {
         if (this.container.current && !this.container.current.contains(event.target)) {
             this.setState({
@@ -54,7 +60,7 @@ class NavbarStatePlay extends React.Component {
                 </Link>
 
                 <div className={"ml-auto mr-3 drop-icon"}
-                     ref={this.container}>
+                     ref={console.log(this.container)}>
                     <div className={""}>
                         {this.pokeballImg()}
                     </div>
