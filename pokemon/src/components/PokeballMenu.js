@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-// import './Style/PokeballMenu.css';
+import './Style/PokeballMenu.css';
 import {Link} from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import TypeModal from "./TypeModal";

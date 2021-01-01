@@ -51,7 +51,7 @@ const App = () => {
            <Route path={"/sign-in"} exact component={SignIn}/>
            <Route path={"/profile"} exact component={UserProfile}/>
            {/*<div>{renderNames}</div>*/}
-            <EventTest />
+           {/* <EventTest />*/}
 
             </Router>
 

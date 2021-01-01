@@ -1,21 +1,47 @@
-import React, {useState, useRef} from 'react';
-// import './Style/App.css'
+import React, {useState, useRef, useEffect} from 'react';
 import pokeball from './Images/pokeball1.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSearch} from '@fortawesome/free-solid-svg-icons'
 import {Link} from 'react-router-dom';
-import PokeballMenu from './PokeballMenu';
 import Modal from "react-bootstrap/Modal";
 import TypeModal from "./TypeModal";
 
 const NavbarIndex = () => {
+
     //Hooks return an array with two values [currentState, updatedState]
     //useState() passed value is the default state
     //for example: const [count, setCount] = useState(4);
     //the default state is 4, current state is also 4 and we can update the state value with setCount
     const [show, setShow] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const openClose = () => {
+        setIsOpen(!isOpen);
+    }
 
 
+    const RenderDropdown = () => {
+        if (isOpen === true) {
+            return (
+                <div className={'pokeball-menu'}>
+                    <ul>
+                        <li className={"dropdown-link"}>
+                            <Link to={"/profile"} className={"nav-links"}
+                            >Profile</Link>
+                        </li>
+                        <li className={"dropdown-link"}>
+                            <button className={"nav-links"}>Search</button>
+                        </li>
+                        <li className={"dropdown-link"}>
+                            <button onClick={() => setShow(true)
+                            }>Filter Type
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            )
+        }
+        return null;
+    }
     //TODO: 1. create reference to access the element that where the state changes will occur
     const inputRef = useRef();
 
@@ -34,39 +60,55 @@ const NavbarIndex = () => {
 
     //TODO: 3. write a function that changes the state when the button is clicked
     const handleClick = () => {
+        console.log(inputRef)
         setDropdown(!dropdown)
     }
+
     //TODO: 4. write a function that changes the state when a user clicks anywhere on the screen
-    const handleClickOutside = event => {
-        if (inputRef.current && !inputRef.current.contains(event.target)) {
-            setDropdown(!dropdown)
-            // this.setState({
-            //     open: false,
-            // });
-        }
+    // const handleClickOutside = (event) => {
+    //     if (inputRef.current && !inputRef.current(event.currentTarget)) {
+    //
+    //         setDropdown(!dropdown)
+    //         // this.setState({
+    //         //     open: false,
+    //         // });
+    //     }
+    // };
+
+
+    // const dropdownClicked = () => {
+    //     inputRef.addEventListener('click', handleClick)
+    //
+    //     return () => {
+    //         inputRef.removeEventListener('click', handleClick)
+    //     }
+    //
+    //     // return a clean-up function
+    // }
+    // const windowClicked = () => {
+    //     console.log("window clicked")
+    //     document.querySelector('body').addEventListener('click', windowClicked)
+    //
+    //     return () => {
+    //         document.querySelector('body').removeEventListener('click', windowClicked)
+    //     }
+    // }
     //TODO: 5. create event listeners that will
-    const componentDidMount = () => {
-        document.addEventListener("mousedown", handleClickOutside);
-    }
-    const componentWillUnmount = () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    };
-
-
+    // useEffect(() => {
+    //
+    // }, [])
 
     const pokeballImg = () => {
         return (
-            <button className={"buttonInner closedPokeball"
-                //TODO: refactor styling to change with state change
-            // + (!dropdown ? " closedPokeball" : " openPokeball")
-                }
-                    type={'button'} onClick={handleClick}>
+            <button className={"buttonInner" + (!isOpen ? " closedPokeball" : " openPokeball")}
+                    type={'button'} onClick={() => {
+                openClose()
+            }}>
                 <img className={"pokeball"} src={pokeball} alt="pokeball"/>
             </button>
         )
     }
+
 
     return (
         <React.Fragment>
@@ -80,56 +122,13 @@ const NavbarIndex = () => {
                 <Link to={"/sign-in"}>
                     <p>Sign In</p>
                 </Link>
-                <div className={"ml-auto mr-3 drop-icon"}
-                     // onClick={handleClick}
-                     ref={inputRef.current}
-                >
+                <div className={"ml-auto mr-3 drop-icon"}>
                     <div className={""}>
                         {pokeballImg()}
                     </div>
-                    <div className={!dropdown ? 'pokeball-menu clicked' : 'pokeball-menu'}>
-                        <ul>
-                            <li className={"dropdown-link"}>
-                                <Link to={"/profile"} className={"nav-links"}
-                                    // onClick={handleClick()}
-                                >Profile</Link>
-                            </li>
-                            <li className={"dropdown-link"}>
-                                <button className={"nav-links"}>Search</button>
-                            </li>
-                            <li className={"dropdown-link"}>
-                                <button onClick={() => setShow(true)
-                                    // && closePokeball
-                                }>Filter Type</button>
-                            </li>
-                        </ul>
-                    </div>
+                    <RenderDropdown />
                 </div>
             </nav>
-
-            {/*<div className={!dropdown ? 'pokeball-menu clicked' : 'pokeball-menu'}>*/}
-            {/*    {<PokeballMenu/>}*/}
-            {/*</div>*/}
-
-
-            {/*<div className={!dropdown ? 'pokeball-menu clicked' : 'pokeball-menu'}>*/}
-            {/*    <ul>*/}
-            {/*        <li className={"dropdown-link"}>*/}
-            {/*            <Link to={"/profile"} className={"nav-links"}*/}
-            {/*                  */}
-            {/*            >Profile</Link>*/}
-            {/*        </li>*/}
-            {/*        <li className={"dropdown-link"}>*/}
-            {/*            <button className={"nav-links"}>Search</button>*/}
-            {/*        </li>*/}
-            {/*        <li className={"dropdown-link"}>*/}
-            {/*            <button onClick={() => setShow(true)*/}
-            {/*                // && closePokeball*/}
-            {/*            }>Filter Type*/}
-            {/*            </button>*/}
-            {/*        </li>*/}
-            {/*    </ul>*/}
-            {/*</div>*/}
 
             <Modal
                 show={show}

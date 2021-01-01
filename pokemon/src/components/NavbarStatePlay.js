@@ -13,6 +13,7 @@ class NavbarStatePlay extends React.Component {
     };
     //function that changes the state change when the button is clicked
     handleButtonCLick = () => {
+        console.log(this.container)
         this.setState(state => {
             return {
                 open: !state.open,
@@ -21,14 +22,15 @@ class NavbarStatePlay extends React.Component {
     }
 
     //events listeners that will run handleClickOutside
-    componentDidMount() {
+    componentDidMount = () => {
         document.addEventListener("mousedown", this.handleClickOutside);
-    }
+    };
     componentWillUnmount() {
         document.removeEventListener("mousedown", this.handleClickOutside);
     }
     //will change the state when anywhere on the screen is clicked
     handleClickOutside = event => {
+
         if (this.container.current && !this.container.current.contains(event.target)) {
             this.setState({
                 open: false,
@@ -39,7 +41,7 @@ class NavbarStatePlay extends React.Component {
 
     pokeballImg() {
         return (
-            <button className={"buttonInner openPokeball"} type={'button'} onClick={this.handleButtonCLick}>
+            <button className={"buttonInner openPokeball"} type={'button'} onClick={this.handleButtonCLick} ref={this.container}>
                 <img className={"pokeball"} src={pokeball} alt="pokeball"/>
             </button>
         )
@@ -60,7 +62,7 @@ class NavbarStatePlay extends React.Component {
                 </Link>
 
                 <div className={"ml-auto mr-3 drop-icon"}
-                     ref={console.log(this.container)}>
+                     >
                     <div className={""}>
                         {this.pokeballImg()}
                     </div>
