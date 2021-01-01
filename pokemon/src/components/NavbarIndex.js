@@ -22,6 +22,8 @@ const NavbarIndex = () => {
         if (showModal == true || !pokeballNode.current.contains(e.target)) {
             setIsOpen(!isOpen)
         }
+        else if(pokeballNode.current.contains(e.target))
+        setIsOpen(isOpen);
     }
 
     useEffect(() => {
