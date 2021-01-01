@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./Style/TypeModal.css";
-
-const TypeModal = () => {
-
+import Modal from "react-bootstrap/Modal";
+const TypeModal = ({ parentCallback }) => {
+    let isOpen = false;
+    let showModal = false;
     const typeBlock1 = [
         {type: 'Water'},
         {type: 'Grass'},
@@ -37,7 +38,11 @@ const TypeModal = () => {
                 <div className={"d-flex justify-content-around"} key={section.block}>{section.block.map(icon => {
                     return (
                         <div className={"my-2"} key={icon.type}>
-                        <button type={"button"} className={(icon.type.toLowerCase()) + " btn-circle"}>{icon.type}</button>
+                        <button onClick={() => {
+                            parentCallback(!isOpen, !showModal);
+                            }
+                        }
+                                className={(icon.type.toLowerCase()) + " btn-circle"}>{icon.type}</button>
                         </div>
                 )
                 })}</div>
@@ -46,9 +51,9 @@ const TypeModal = () => {
     })
 
     return (
-        <div>
+        <Modal.Body>
             <div>{renderContent}</div>
-        </div>
+        </Modal.Body>
     )
 }
 

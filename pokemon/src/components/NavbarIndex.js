@@ -12,12 +12,15 @@ const NavbarIndex = () => {
     //useState() passed value is the default state
     //for example: const [count, setCount] = useState(4);
     //the default state is 4, current state is also 4 and we can update the state value with setCount
-    const [show, setShow] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const openClose = () => {
         setIsOpen(!isOpen);
     }
-
+    const callback = (isOpen, showModal) => {
+        setIsOpen(!isOpen);
+        setShowModal(!showModal);
+    }
 
     const RenderDropdown = () => {
         if (isOpen === true) {
@@ -25,14 +28,14 @@ const NavbarIndex = () => {
                 <div className={'pokeball-menu'}>
                     <ul>
                         <li className={"dropdown-link"}>
-                            <Link to={"/profile"} className={"nav-links"}
+                            <Link to={"/profile"} onClick={() => setIsOpen(!isOpen)} className={"nav-links"}
                             >Profile</Link>
                         </li>
                         <li className={"dropdown-link"}>
                             <button className={"nav-links"}>Search</button>
                         </li>
                         <li className={"dropdown-link"}>
-                            <button onClick={() => setShow(true)
+                            <button onClick={() => setShowModal(!showModal)
                             }>Filter Type
                             </button>
                         </li>
@@ -110,7 +113,9 @@ const NavbarIndex = () => {
     }
 
 
-    return (
+    return [
+
+        (
         <React.Fragment>
             <nav className={"nav d-flex"}>
                 <Link to={"/"}>
@@ -126,29 +131,29 @@ const NavbarIndex = () => {
                     <div className={""}>
                         {pokeballImg()}
                     </div>
-                    <RenderDropdown />
+                    <RenderDropdown onClick={openClose}/>
                 </div>
             </nav>
 
             <Modal
-                show={show}
-                onHide={() => setShow(false)}
+                show={showModal}
+                onHide={() => setShowModal(!showModal)}
                 dialogClassName="modal-90w"
                 aria-labelledby="example-custom-modal-styling-title"
             >
-                <Modal.Header closeButton>
+                <Modal.Header closeButton onClick={() => setIsOpen(!isOpen)}>
                     <Modal.Title id="example-custom-modal-styling-title">
                         Custom Modal Styling
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <TypeModal/>
+                    <TypeModal parentCallback={callback}/>
                 </Modal.Body>
             </Modal>
 
 
         </React.Fragment>
-    )
+    )]
 }
 
 export default NavbarIndex;
