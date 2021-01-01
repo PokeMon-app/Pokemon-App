@@ -17,13 +17,52 @@ const NavbarIndex = () => {
 
     let modalNode = useRef(null);
     let pokeballNode = useRef(null);
+    //without any effects:
+    // 1. MODAL and DROPDOWN closes when you click a type button;
+    // 2. Only the MODAL closes when you click the CLOSEBUTTON
+    // 3. DROPDOWN will open and close if you click on the pokeball
+
+    // I need to find a way to close the menu when anywhere but the DROPDOWN or the MODAL is clicked
 
     const handleClick = e => {
-        if (showModal == true || !pokeballNode.current.contains(e.target)) {
-            setIsOpen(!isOpen)
-        }
-        else if(pokeballNode.current.contains(e.target))
-        setIsOpen(isOpen);
+        //what works? RESULT = NO CHANGE...
+        // 1. MODAL and DROPDOWN closes when you click a type button;
+        // 2. Only the MODAL closes when you click the CLOSEBUTTON
+        // 3. DROPDOWN will open and close if you click on the pokeball
+        // if(!pokeballNode.current.contains(e.target)) {
+        //     setIsOpen(isOpen)
+        // }
+
+        //what works? RESULT = FUNCTIONALITY I WANT, BUT WITH THE DRAWBACK OF NOT FUNCTIONING DROPDOWN BUTTON...
+        // 1. DROPDOWN will close if a click occurs outside the dropdown
+        // 2. MODAL and DROPDOWN closes when you click a type button;
+        // 3. MODAL and DROPDOWN closes when you click the CLOSEBUTTON
+        // what doesn't work?
+        // 1. DROPDOWN will not open and close if clicked on:
+        //    if you click on the dropdown to close it, the dropdown will reopen immediately...
+        // if(!pokeballNode.current.contains(e.target)) {
+        //     setIsOpen(!isOpen)
+        // }
+
+
+        //TODO: write a conditional that will close the dropdown menu if (setShowModal == false && !pokeballNode.current.contains(e.target))
+        //TODO: write a conditional that will close the dropdown menu after the modal closes and anywhere is clicked a second time
+
+        //PROBLEM - this conditional will make it so that DROPDOWN doesn't open and close properly when clicked on...
+        // if(!pokeballNode.current.contains(e.target) && showModal === false) {
+        //     setIsOpen(!isOpen)
+        // }
+        // else if (pokeballNode.current.contains(e.target)) {
+        //     setIsOpen(isOpen)
+        // }
+        // else if (!pokeballNode.current.contains(e.target)) {
+        //     setIsOpen(isOpen)
+        //     // console.log("Outer Click")
+        // }
+        // else if(!pokeballNode.current.contains(e.target) && showModal === false ) {
+        //     console.log("Outer Click")
+        // }
+
     }
 
     useEffect(() => {
@@ -87,7 +126,7 @@ const NavbarIndex = () => {
                     <div className={""}>
                         {pokeballImg()}
                     </div>
-                    <RenderDropdown onClick={!isOpen}/>
+                    <RenderDropdown/>
                 </div>
             </nav>
 
