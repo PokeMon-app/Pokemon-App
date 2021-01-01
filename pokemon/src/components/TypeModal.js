@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import "./Style/TypeModal.css";
 import Modal from "react-bootstrap/Modal";
 const TypeModal = ({ parentCallback }) => {

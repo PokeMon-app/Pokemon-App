@@ -7,25 +7,35 @@ import Modal from "react-bootstrap/Modal";
 import TypeModal from "./TypeModal";
 
 const NavbarIndex = () => {
-
-    //Hooks return an array with two values [currentState, updatedState]
-    //useState() passed value is the default state
-    //for example: const [count, setCount] = useState(4);
-    //the default state is 4, current state is also 4 and we can update the state value with setCount
     const [showModal, setShowModal] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-    const openClose = () => {
-        setIsOpen(!isOpen);
-    }
+
     const callback = (isOpen, showModal) => {
         setIsOpen(!isOpen);
         setShowModal(!showModal);
     }
 
+    let modalNode = useRef(null);
+    let pokeballNode = useRef(null);
+
+    const handleClick = e => {
+        if (showModal == true || !pokeballNode.current.contains(e.target)) {
+            setIsOpen(!isOpen)
+        }
+    }
+
+    useEffect(() => {
+        if (isOpen) document.addEventListener('mousedown', handleClick);
+        else document.removeEventListener('mousedown', handleClick);
+        return () => {
+            document.removeEventListener('mousedown', handleClick);
+        };
+    }, [ isOpen ]);
+
     const RenderDropdown = () => {
         if (isOpen === true) {
             return (
-                <div className={'pokeball-menu'}>
+                <div ref={pokeballNode} className={'pokeball-menu'}>
                     <ul>
                         <li className={"dropdown-link"}>
                             <Link to={"/profile"} onClick={() => setIsOpen(!isOpen)} className={"nav-links"}
@@ -45,73 +55,17 @@ const NavbarIndex = () => {
         }
         return null;
     }
-    //TODO: 1. create reference to access the element that where the state changes will occur
-    const inputRef = useRef();
-
-    //WORKS WITH HOOKS BUT NO FUNCTIONALITY FOR A USER
-    // WHEN THEY CLICK A LIST ITEM OR CLICKING OUT OF MENU
-    //----------------------------------------------------//
-    // const handleClick = () => {
-    //     if (dropdown === true)
-    //         setDropdown(false)
-    //     else
-    //         setDropdown(true)
-    //
-    // };
-    //TODO: 2. set the default value of the elements state
-    const [dropdown, setDropdown] = useState(false);
-
-    //TODO: 3. write a function that changes the state when the button is clicked
-    const handleClick = () => {
-        console.log(inputRef)
-        setDropdown(!dropdown)
-    }
-
-    //TODO: 4. write a function that changes the state when a user clicks anywhere on the screen
-    // const handleClickOutside = (event) => {
-    //     if (inputRef.current && !inputRef.current(event.currentTarget)) {
-    //
-    //         setDropdown(!dropdown)
-    //         // this.setState({
-    //         //     open: false,
-    //         // });
-    //     }
-    // };
-
-
-    // const dropdownClicked = () => {
-    //     inputRef.addEventListener('click', handleClick)
-    //
-    //     return () => {
-    //         inputRef.removeEventListener('click', handleClick)
-    //     }
-    //
-    //     // return a clean-up function
-    // }
-    // const windowClicked = () => {
-    //     console.log("window clicked")
-    //     document.querySelector('body').addEventListener('click', windowClicked)
-    //
-    //     return () => {
-    //         document.querySelector('body').removeEventListener('click', windowClicked)
-    //     }
-    // }
-    //TODO: 5. create event listeners that will
-    // useEffect(() => {
-    //
-    // }, [])
 
     const pokeballImg = () => {
         return (
             <button className={"buttonInner" + (!isOpen ? " closedPokeball" : " openPokeball")}
                     type={'button'} onClick={() => {
-                openClose()
+                setIsOpen(!isOpen)
             }}>
                 <img className={"pokeball"} src={pokeball} alt="pokeball"/>
             </button>
         )
     }
-
 
     return [
 
@@ -131,17 +85,18 @@ const NavbarIndex = () => {
                     <div className={""}>
                         {pokeballImg()}
                     </div>
-                    <RenderDropdown onClick={openClose}/>
+                    <RenderDropdown onClick={!isOpen}/>
                 </div>
             </nav>
 
             <Modal
+                ref={modalNode}
                 show={showModal}
                 onHide={() => setShowModal(!showModal)}
                 dialogClassName="modal-90w"
                 aria-labelledby="example-custom-modal-styling-title"
             >
-                <Modal.Header closeButton onClick={() => setIsOpen(!isOpen)}>
+                <Modal.Header closeButton>
                     <Modal.Title id="example-custom-modal-styling-title">
                         Custom Modal Styling
                     </Modal.Title>
