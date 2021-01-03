@@ -8,6 +8,8 @@ import history from "../history";
 import Register from "./Register";
 import SignIn from "./SignIn";
 import UserProfile from "./UserProfile";
+import GetPokemon from "./GetPokemon";
+import SearchPokemon from "./SearchPokemon";
 import "./Style/App.css"
 import "./Style/NavbarIndex.css"
 
@@ -40,6 +42,8 @@ const App = () => {
            <Route path={"/register"} exact component={Register}/>
            <Route path={"/sign-in"} exact component={SignIn}/>
            <Route path={"/profile"} exact component={UserProfile}/>
+           <Route path={"/getPokemon"} exact component={GetPokemon}/>
+           <Route path={"/search"} exact component={SearchPokemon}/>
            </Router>
 
         </div>

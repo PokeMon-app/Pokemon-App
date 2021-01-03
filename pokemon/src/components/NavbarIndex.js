@@ -8,7 +8,7 @@ import {faUserCircle} from '@fortawesome/free-solid-svg-icons'
 import {Link} from 'react-router-dom';
 import Modal from "react-bootstrap/Modal";
 import TypeModal from "./TypeModal";
-
+//WILL NEED TO FIND A SOLUTION THAT WILL REDIRECT A USER TO THE SEARCHPOKEMON PAGE IF THE SEARCH INPUT FIELD IS NOT AN EMPTY STRING AND IF A TYPE IS CLICKED
 const NavbarIndex = () => {
     const [showModal, setShowModal] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
@@ -84,6 +84,9 @@ const NavbarIndex = () => {
                 </Link>
                 <Link to={"/sign-in"}>
                     <p>Sign In</p>
+                </Link>
+                <Link to={"/getPokemon"}>
+                    <p>All</p>
                 </Link>
                 <div className={"ml-auto mr-3 my-auto drop-icon"}>
                     <div className={""}>
