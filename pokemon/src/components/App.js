@@ -1,6 +1,6 @@
 //1. import
 import React from 'react';
-import {Router, Route, Link} from 'react-router-dom';
+import {Router, Route} from 'react-router-dom';
 
 import NavbarIndex from "./NavbarIndex";
 import Welcome from "./Welcome";
@@ -8,19 +8,10 @@ import history from "../history";
 import Register from "./Register";
 import SignIn from "./SignIn";
 import UserProfile from "./UserProfile";
-
-// import Info from "./Info";
-import EventTest from "./EventTest";
 import "./Style/App.css"
 import "./Style/NavbarIndex.css"
-import ReactDOM from "react-dom";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
-import NavbarStatePlay from "./NavbarStatePlay";
 
-//2. create function to return JSX
 const App = () => {
-    //state = {nameOfState : defaultValue} - defaultValue
 
     const pokeMon = [
         {name: "Bulbasaur", description: "green pokemon", type:"grass"},
@@ -43,17 +34,13 @@ const App = () => {
     })
     return (
         <div>
-            <Router history={history}>
-            <NavbarIndex/>
-            {/*<NavbarStatePlay />*/}
+           <Router history={history}>
+           <NavbarIndex/>
            <Route path={"/"} exact component={Welcome}/>
            <Route path={"/register"} exact component={Register}/>
            <Route path={"/sign-in"} exact component={SignIn}/>
            <Route path={"/profile"} exact component={UserProfile}/>
-           {/*<div>{renderNames}</div>*/}
-           {/* <EventTest />*/}
-
-            </Router>
+           </Router>
 
         </div>
     )
