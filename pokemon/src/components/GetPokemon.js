@@ -6,42 +6,64 @@ function GetPokemon() {
     // may need two seperate methods to persist the previous gen list
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [Gen1Pokemon, setGen1Pokemon] = useState([]);
-    // const [items, setItems] = useState([]);
+    const [AllPokemon, setAllPokemon] = useState([]);
 
-    let Gen2Url = "https://pokeapi.co/api/v2/pokemon?offset=151&limit=100";
-    let Gen3Url = "https://pokeapi.co/api/v2/pokemon?offset=251&limit=135";
-    let Gen4Url = "https://pokeapi.co/api/v2/pokemon?offset=386&limit=108";
-    let Gen5Url = "https://pokeapi.co/api/v2/pokemon?offset=495&limit=154";
-    let Gen6Url = "https://pokeapi.co/api/v2/pokemon?offset=649&limit=72";
-    let Gen7Url = "https://pokeapi.co/api/v2/pokemon?offset=721&limit=88";
-    let Gen8Url = "https://pokeapi.co/api/v2/pokemon?offset=809&limit=89";
 
-    useEffect(() => {
-        fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
-            .then(res => res.json())
-            .then(
-                (data) => {
-                    setIsLoaded(true);
-                    // console.log(data.results)
-                    // setItems(data.results);
-                    for(let pokemon of data.results) {
-                        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
-                            .then(results => results.json())
-                            .then(pokemon => {
-                                let newPokemon = {id: pokemon.id, name: pokemon.name, image: pokemon.sprites.front_default};
-                                console.log(Gen1Pokemon)
-                                setGen1Pokemon([...Gen1Pokemon, newPokemon]);
-                                console.log(Gen1Pokemon)
-                            })
-                    }
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                }
-            )
-    }, [])
+
+
+    const getListByGen = async url => {
+        return new Promise((resolve, reject) => {
+            fetch(url)
+                .then(response => response.json())
+                .then(data=> {
+                    resolve(data)
+                })
+        });
+    }
+
+    const showPokemon = () => {
+        const getData = async () => {
+            const pokeUrls = [
+                "https://pokeapi.co/api/v2/pokemon?limit=151",
+                "https://pokeapi.co/api/v2/pokemon?offset=151&limit=100",
+                "https://pokeapi.co/api/v2/pokemon?offset=251&limit=135",
+                "https://pokeapi.co/api/v2/pokemon?offset=386&limit=108",
+                "https://pokeapi.co/api/v2/pokemon?offset=495&limit=154",
+                "https://pokeapi.co/api/v2/pokemon?offset=649&limit=72",
+                "https://pokeapi.co/api/v2/pokemon?offset=721&limit=88",
+                "https://pokeapi.co/api/v2/pokemon?offset=809&limit=89",
+            ];
+            for(let url of pokeUrls) {
+                let response = await getListByGen(url)
+                await renderPokemon(response.results);
+                // setLoading(false);
+            }
+        }
+        getData();
+    }
+
+    useEffect(showPokemon, []);
+
+    let byPokeUrl = "https://pokeapi.co/api/v2/pokemon/";
+
+    const getEachPokemon = url => {
+        return new Promise((resolve, reject) => {
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    resolve(data);
+                })
+        });
+    }
+
+    const renderPokemon = async data => {
+        let pokeList = await Promise.all(data.map(async pokemon => {
+            let getPokemon = await getEachPokemon(byPokeUrl + pokemon.name)
+            return getPokemon;
+        }))
+        setAllPokemon(pokeList);
+    }
+
 
     if (error) {
         return <div>Error: {error.message}</div>;
@@ -49,13 +71,13 @@ function GetPokemon() {
         return <div>Loading...</div>;
     } else {
         return (
-            <ul>
-                {Gen1Pokemon.map(pokemon => {
-                    return  <li key={pokemon.name}>
-                                {pokemon.name}
-                            </li>
+            <div>
+                {AllPokemon.map((pokemon,index) => {
+                    return  <button key={index}>
+                                <img src={pokemon.sprites.front_default} alt="pokeImg"/>
+                            </button>
                 })}
-            </ul>
+            </div>
         )
     }
 }
